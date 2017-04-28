@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Shopping List App </title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+
+
+
+<div data-role = "page" id="homePage">
+<div data-role = "main" class="ui-content">
+
+<h1> The Shopping List</h1>
+
+<form class="ui-filterable">
+	<input id="myFilter" data-type="search" placeholder="Search for Items...">
+</form>
+
+<ul data-role="listview" data-inset="true" data-autodividers="true" data-filter="true" data-input="#myFilter">
+<li><a href="#pageOne"> List of Items  <span class="ui-li-count">12</span></a><br></li>
+<li><a > Example</a><br></li>	
+</ul>
+
+<div data-role="footer" data-position="fixed">
+<div data-role="navbar" data-iconpos="right">
+<ul>
+<li><a href="#addItem" data-icon="plus" data-iconpos="right-side" data-mini="true" class="ui-btn-active ui-state-persist"> Add Item</a></li>
+</ul>
+</div>
+</div>
+	
+</div>
+</div>
+
+
+
+
+<div data-role = "page" id="addItem">
+<div data-role = "main" class="ui-content">
+
+<div data-role="header">
+<div data-role="navbar" data-iconpos="left">
+<ul>
+<li><a href="#homePage" data-icon="arrow-l" class="ui-btn-active ui-state-persist"> Back</a></li>
+</ul>
+</div>
+</div>
+
+<h1> Add an Item</h1>
+
+
+  <li class="ui-field-contain">
+            <label for="itemName">Item Name:</label>
+            <input type="text" name="itemName" id="itemName" value="" data-clear-btn="true">
+        </li>
+		  <li class="ui-field-contain">
+            <label for="itemNumber">Item Quantity:</label>
+            <input type="text" name="itemNumber" id="itemNumber" value="" data-clear-btn="true">
+        </li>
+		
+		<fieldset class="ui-grid-a">
+                    <div class="ui-block-b"><button type="submit" class="ui-btn ui-corner-all ui-btn-a ui-btn-active ">Submit</button></div>
+            </fieldset> 
+
+</div>
+</div>
+
+
+
+
+
+</body>
+</html>
