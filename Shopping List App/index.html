@@ -25,7 +25,12 @@
 
 <ul id = "list" data-role="listview" data-input="#myFilter" data-inset="true" data-filter="true" >
 <!--  <li><a href="#pageOne"> List of Items  <span class="ui-li-count">12</span></a><br></li>
-<li><p > Example </p><br></li>	-->
+<li><p > Example </p><br></li>	
+        <li><input type="checkbox" id="checkbox-h-6a" data-iconpos="right" data-mini="true">
+        <label for="checkbox-h-6a">One <span class="ui-li-count">12</span></label></li> 
+		
+		    <label><input type="checkbox" name="checkbox-0 ">Check me <span class="ui-li-count">12</span></label>
+			-->
 </ul>
 
 <div data-role="footer" data-position="fixed">
@@ -65,7 +70,7 @@
 </div>
 
    
-
+   
 
 
 </body>
@@ -81,7 +86,8 @@
 	 var itemQuantity = quantity.value;
      var listItem = document.createElement("li");
 	 //listItem.innerHTML = currentItem;
-     listItem.innerHTML ="<a>"+  currentItem + '<span class="ui-li-count">Quantity: ' + itemQuantity +"</span></a><br>" ;
+     //listItem.innerHTML ="<a>"+  currentItem + '<span class="ui-li-count">Quantity: ' + itemQuantity +"</span></a><br>" ;
+	 listItem.innerHTML= '<label><input type="checkbox" name="checkbox-0 ">'+ currentItem + ' <span class="ui-li-count">'+ itemQuantity +'</span></label><br>';
      list.appendChild(listItem);
      itemInput.value = "";
 	 quantity.value = "";
