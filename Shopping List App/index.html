@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 </head>
 <body>
 
@@ -13,17 +14,18 @@
 
 <div data-role = "page" id="homePage">
 <div data-role = "main" class="ui-content">
-<div data-role = "header" data-position="fixed">
-<a id="clear"  data-role="button" data-icon="delete" class="ui-btn ui-corner-all ui-btn-a ui-btn-active ui-btn-right ">Clear Shopping List</a>
 
+<div data-role = "header" data-position="fixed">
+<a  id= "load" data-icon="info" data-role="button" class=" ui-state-persist ui-btn-active ui-btn-centre"> Load List</a>
+<a id="clear"  data-role="button" data-icon="delete" data-iconpos="right" data-mini="true" class=" ui-corner-all ui-btn-a ui-btn-active ui-btn-right ">Clear Shopping List</a>
 </div>
-<h1> The Shopping List</h1>
+<h1> Shopping List App</h1>
 
 <form class="ui-filterable">
 	<input id="myFilter" data-type="search" placeholder="Search for Items...">
 </form>
-
-<ul id = "list" data-role="listview" data-input="#myFilter" data-inset="true" data-filter="true" >
+<div id = shoppingListDiv>
+<ul id = "list" data-role="listview" data-input="#myFilter" data-inset="true" datya-mini="true" data-filter="true" >
 <!--  <li><a href="#pageOne"> List of Items  <span class="ui-li-count">12</span></a><br></li>
 <li><p > Example </p><br></li>	
         <li><input type="checkbox" id="checkbox-h-6a" data-iconpos="right" data-mini="true">
@@ -32,10 +34,12 @@
 		    <label><input type="checkbox" name="checkbox-0 ">Check me <span class="ui-li-count">12</span></label>
 			-->
 </ul>
+</div>
 
 <div data-role="footer" data-position="fixed">
 <div data-role="navbar" data-iconpos="right">
 <ul>
+<!-- <li><a  id= "save" data-icon="check" data-role="button" href="#" class="ui-btn-active ui-state-persist " > Save List</a></li> -->
 <li><a href="#addItem" data-icon="plus" data-iconpos="right-side" data-mini="true" class="ui-btn-active ui-state-persist"> Add Item</a></li>
 </ul>
 </div>
@@ -53,7 +57,7 @@
 <div data-role="header">
 <div data-role="navbar" data-iconpos="left">
 <ul>
-<li><a href="#homePage" data-icon="arrow-l" class="ui-btn-active ui-state-persist"> Back</a></li>
+<li><a  id= "back" href="#homePage" data-icon="arrow-l" class="ui-btn-active ui-state-persist"> Back</a></li>
 </ul>
 </div>
 </div>
@@ -74,12 +78,49 @@
 
 
 </body>
-
+   
   <script>
+
+$(document).ready(function(){
+console.log(
+       JSON.parse(localStorage["myKey"])    
+     );
+//$(window).unload(saveDiv);
+//loadDiv;
+});
+
+
+function saveDiv() {
+  //localStorage["myKey"] = JSON.stringify($("#shoppingListDiv").html());
+  localStorage["myKey"]=JSON.stringify($("#list").html());
+};
+
+function loadDiv() {
+
+
+   if (localStorage["myKey"] != null) {
+      //var contentsOfOldDiv = JSON.parse(localStorage["myKey"]);    
+      //document.getElementById("shoppingListDiv").innerHTML= JSON.parse(localStorage["myKey"]);
+	  var oldList = document.createElement("li");
+	  oldList.innerHTML= JSON.parse(localStorage["myKey"]);
+	  list.append(oldList);
+	  //list =JSON.parse(localStorage["myKey"]);
+	  //$( "myKey" ).load( "#list" );
+     } 
+};
+
+
+
+  
+  
+  
+  
    var itemInput = document.getElementById("item");
    var quantity = document.getElementById("quantity");
    var clear = document.getElementById("clear");
    var submit = document.getElementById("submit");
+   var save = document.getElementById("save");
+   var load = document.getElementById("load");
    var list = document.getElementById("list");
    function addItem() {
      var currentItem = itemInput.value;
@@ -87,17 +128,32 @@
      var listItem = document.createElement("li");
 	 //listItem.innerHTML = currentItem;
      //listItem.innerHTML ="<a>"+  currentItem + '<span class="ui-li-count">Quantity: ' + itemQuantity +"</span></a><br>" ;
-	 listItem.innerHTML= '<label><input type="checkbox" name="checkbox-0 ">'+ currentItem + ' <span class="ui-li-count">'+ itemQuantity +'</span></label><br>';
+	 listItem.innerHTML= '<label><input type="checkbox" name="checkbox-0 ">'+ currentItem + ' <span class="ui-li-count">'+ itemQuantity +'</span></label>';
      list.appendChild(listItem);
      itemInput.value = "";
 	 quantity.value = "";
    }
+   
+   function loadlist(){
+   list = localStorage.getItem("shoppingList"); 
+   }
    submit.onclick = addItem;
+   back.onclick = saveDiv;
+   //save.onclick = saveDiv;
+   load.onclick = loadDiv;
    clear.onclick = function() {
      list.innerHTML = "";
      itemInput.value = "";
    }
+   
+   
+   
+   
   </script>
+  
+
+
+
   
   
 </html>
