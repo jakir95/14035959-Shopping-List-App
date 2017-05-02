@@ -5,6 +5,8 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript" src="http://dev.jtsage.com/cdn/spinbox/latest/jqm-spinbox.min.js"></script>
+
 
 </head>
 <body>
@@ -54,22 +56,29 @@
 <div data-role = "page" id="addItem">
 <div data-role = "main" class="ui-content">
 
-<div data-role="header">
-<div data-role="navbar" data-iconpos="left">
-<ul>
-<li><a  id= "back" href="#homePage" data-icon="arrow-l" class="ui-btn-active ui-state-persist"> Back</a></li>
-</ul>
-</div>
-</div>
 
 <h1> Add an Item</h1>
 			<label for="item">Add item to list: </label><input type="text" id="item">
-			<label for="item">Quantity </label><input type="text" id="quantity">
+			<!-- <label for="item">Quantity </label><input type="text" id="quantity"> -->
+			<div class="ui-field-contain">
+			<label for="spin3">Quantity</label>
+			<input type="text" data-mini="true" data-role="spinbox" name="spin3" id="quantity" data-options='{"type":"horizontal"}' value="1" max="100" />
+		</div>
 			<fieldset class="ui-grid-a">
 			<div class="ui-block-b"><button id="submit" type="submit" class="ui-btn ui-corner-all ui-btn-a ui-btn-active ">Submit</button></div>
 			</fieldset>
 			
 
+<div data-role="footer" data-position='fixed'>
+<div data-role="navbar" data-iconpos="left">
+<ul>
+<li><a  id= "back" href="#homePage" data-icon="arrow-l" class="ui-btn-active ui-state-persist"> Back</a></li>
+</ul>
+</div>
+</div>			
+
+			
+			
 </div>
 </div>
 
@@ -86,7 +95,7 @@ console.log(
        JSON.parse(localStorage["myKey"])    
      );
 //$(window).unload(saveDiv);
-//loadDiv;
+$(window).load(loadDiv);
 });
 
 
@@ -124,14 +133,14 @@ function loadDiv() {
    var list = document.getElementById("list");
    function addItem() {
      var currentItem = itemInput.value;
-	 var itemQuantity = quantity.value;
+	 var itemQuantity = $("#quantity").val();
      var listItem = document.createElement("li");
 	 //listItem.innerHTML = currentItem;
      //listItem.innerHTML ="<a>"+  currentItem + '<span class="ui-li-count">Quantity: ' + itemQuantity +"</span></a><br>" ;
 	 listItem.innerHTML= '<label><input type="checkbox" name="checkbox-0 ">'+ currentItem + ' <span class="ui-li-count">'+ itemQuantity +'</span></label>';
      list.appendChild(listItem);
      itemInput.value = "";
-	 quantity.value = "";
+	 quantity.value = "1";
    }
    
    function loadlist(){
@@ -145,7 +154,6 @@ function loadDiv() {
      list.innerHTML = "";
      itemInput.value = "";
    }
-   
    
    
    
